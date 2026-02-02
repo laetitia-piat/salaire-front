@@ -51,7 +51,7 @@ API_Vac/
 ## ▶️ Lancer l’API en local
 uvicorn main:app --reload --port 8000
 
-### 1️⃣ Créer un environnement virtuel
+1️⃣ Créer un environnement virtuel
 python -m venv .venv
 source .venv/bin/activate   # Windows : .venv\Scripts\activate
 
@@ -66,16 +66,16 @@ http://localhost:8000
 
 ---
 
-🔍 Endpoints disponibles
+## 🔍 Endpoints disponibles
 
-####Health check
+Health check
 GET /health
 
 Réponse :
 { "ok": true }
 
 
-#Calcul du salaire
+Calcul du salaire
 POST /calculate
 
 Corps de la requête
@@ -92,3 +92,47 @@ Réponse
   "salaire_brut": 2405.78
 }
 
+---
+
+## ⚙️ Variables d’environnement
+Variable	Description	Valeur par défaut
+TAUX_HORAIRE	Taux horaire de base	12.2561
+MAJORATION_DIMANCHE	Majoration dimanche	7.86
+FRONTEND_ORIGINS	Origins autorisées pour CORS	http://localhost:3000
+
+Exemple :
+
+FRONTEND_ORIGINS=http://localhost:3000,https://mon-front.vercel.app
+
+---
+
+## 🌐 Déploiement
+
+L’API est conçue pour être déployée sur Railway.
+
+Commande de démarrage :
+
+python -m uvicorn main:app --host 0.0.0.0 --port 8000
+
+---
+
+## 🔗 Projet associé
+
+Cette API est consommée par un front-end développé en Next.js, avec Tailwind CSS pour l’interface utilisateur.
+
+---
+
+## ✨ Améliorations possibles
+
+Ajout de nouveaux types de vacations
+Tests unitaires
+Export PDF / Excel
+Historique des calculs
+Authentification (optionnelle)
+
+---
+
+## 👩‍💻 Autrice
+
+Laetitia Piat
+Projet personnel de montée en compétences Fullstack (Next.js + FastAPI)
