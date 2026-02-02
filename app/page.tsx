@@ -55,12 +55,8 @@ export default function Home() {
 
   return (
     <main
-      style={{
-        maxWidth: 400,
-        margin: "40px auto",
-        padding: 16,
-        fontFamily: "system-ui",
-      }}
+      className="mx-auto mt-10 max-w-[400px] p-4 bg-[url('/bg.png')] bg-cover bg-center bg-no-repeat
+    rounded-xl"
     >
       <h1 className="font-bold text-xl text-center mb-10">
         Calcul salaire vacations
