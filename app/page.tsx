@@ -9,6 +9,7 @@ type Result = {
   majoration_dimanche: number;
   salaire_net: number;
   salaire_brut: number;
+  type: string;
 };
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [type, setType] = useState("");
 
   async function onCalculate() {
     setError(null);
@@ -63,6 +65,15 @@ export default function Home() {
       </h1>
 
       <div style={{ display: "grid", gap: 12, marginTop: 16 }}>
+        <select
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+          className="mt-1 w-full rounded border border-gray-300 p-2"
+        >
+          <option value="Tamaris">Tamaris</option>
+          <option value="HPEL">HPEL</option>
+          <option value="Diabeto">Diabeto</option>
+        </select>
         <label>
           Heures travaillées (total)
           <input
