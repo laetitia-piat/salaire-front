@@ -7,9 +7,8 @@ type Result = {
   heures_dimanche: number;
   taux_horaire: number;
   majoration_dimanche: number;
-  salaire_normal: number;
-  salaire_dimanche: number;
-  total: number;
+  salaire_net: number;
+  salaire_brut: number;
 };
 
 export default function Home() {
@@ -39,7 +38,7 @@ export default function Home() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/calculate", {
+      const res = await fetch("https://apivac-production.up.railway.app/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ heures: h, heures_dimanche: hd }),
@@ -110,11 +109,8 @@ export default function Home() {
           <div
             style={{ padding: 12, border: "1px solid #ddd", borderRadius: 8 }}
           >
-            <p>
-              <b>Total :</b> {result.total} €
-            </p>
-            <p>Salaire normal : {result.salaire_normal} €</p>
-            <p>Salaire dimanche : {result.salaire_dimanche} €</p>
+            <p>Salaire net : {result.salaire_net} €</p>
+            <p>Salaire brut : {result.salaire_brut} €</p>
             <hr />
             <small>
               Taux horaire: {result.taux_horaire}€ — Majoration dimanche:{" "}
