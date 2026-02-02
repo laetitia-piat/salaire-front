@@ -38,6 +38,7 @@ def calculate(data: SalaryInput):
     heuresTravaillees = data.heures
     heuresDimanches = data.heures_dimanche
     type = data.type
+
     match type:
         case "Tamaris": 
             salaireBaseMensu = TAUX_HORAIRE * 151.67
@@ -51,7 +52,6 @@ def calculate(data: SalaryInput):
             salaireNet = salaireBrut * 0.769
         case "Diabeto":
             salaireBase = 12.45 * heuresTravaillees
-            #majorationDimanche = heuresDimanches * MAJORATION_DIMANCHE
             revalorisationSegur =  salaireBase /1.4836
             indemnitePrecarite = (salaireBase + revalorisationSegur) * 0.10
             indemniteCongesPayes = 0.10 * (salaireBase + indemnitePrecarite)
@@ -60,7 +60,7 @@ def calculate(data: SalaryInput):
         case _:
             return {"error": "Type inconnu"}
 
-
+ 
 
     return {
         "heures_normales": heuresTravaillees - heuresDimanches,
