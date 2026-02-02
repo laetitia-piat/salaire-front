@@ -7,7 +7,8 @@ app = FastAPI()
 
 origins_env = os.getenv(
     "FRONTEND_ORIGINS",
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://salaire-front.vercel.app"
 )
 
 allowed_origins = [o.strip() for o in origins_env.split(",") if o.strip()]
