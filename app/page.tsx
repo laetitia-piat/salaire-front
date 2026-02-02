@@ -68,6 +68,7 @@ export default function Home() {
           onChange={(e) => setType(e.target.value)}
           className="mt-1 w-full rounded border border-gray-300 p-2"
         >
+          <option value="Select">--Selectionner un lieu--</option>
           <option value="Tamaris">Tamaris</option>
           <option value="HPEL">HPEL</option>
           <option value="Diabeto">Diabeto</option>
