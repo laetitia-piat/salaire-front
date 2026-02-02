@@ -56,18 +56,21 @@ export default function Home() {
   return (
     <main
       style={{
-        maxWidth: 480,
+        maxWidth: 400,
         margin: "40px auto",
         padding: 16,
         fontFamily: "system-ui",
       }}
     >
-      <h1>Calcul salaire vacations</h1>
+      <h1 className="font-bold text-xl text-center mb-10">
+        Calcul salaire vacations
+      </h1>
 
       <div style={{ display: "grid", gap: 12, marginTop: 16 }}>
         <label>
           Heures travaillées (total)
           <input
+            className="border"
             value={heures}
             onChange={(e) => setHeures(e.target.value)}
             type="number"
@@ -80,6 +83,7 @@ export default function Home() {
         <label>
           Heures de dimanche
           <input
+            className="border"
             value={heuresDimanche}
             onChange={(e) => setHeuresDimanche(e.target.value)}
             type="number"
@@ -92,7 +96,7 @@ export default function Home() {
         <button
           onClick={onCalculate}
           disabled={loading}
-          style={{ padding: 10, cursor: "pointer" }}
+          className="mt-5 p10 bg-gray-500 text-white rounded w-1/2 m-auto hover:pointer"
         >
           {loading ? "Calcul..." : "Calculer"}
         </button>
@@ -106,10 +110,7 @@ export default function Home() {
             <p>Salaire net : {result.salaire_net} €</p>
             <p>Salaire brut : {result.salaire_brut} €</p>
             <hr />
-            <small>
-              Taux horaire: {result.taux_horaire}€ — Majoration dimanche:{" "}
-              {(result.majoration_dimanche * 100).toFixed(0)}%
-            </small>
+            <small>Taux horaire: {result.taux_horaire}€</small>
           </div>
         )}
       </div>
