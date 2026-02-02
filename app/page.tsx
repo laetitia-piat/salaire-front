@@ -35,7 +35,7 @@ export default function Home() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/calculate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ heures: h, heures_dimanche: hd }),
+        body: JSON.stringify({ heures: h, heures_dimanche: hd, type }),
       });
 
       if (!res.ok) {
