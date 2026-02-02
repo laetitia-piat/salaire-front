@@ -29,12 +29,6 @@ export default function Home() {
       setError("Merci d’entrer des nombres valides (>= 0).");
       return;
     }
-    if (hd > h) {
-      setError(
-        "Les heures de dimanche ne peuvent pas dépasser les heures totales.",
-      );
-      return;
-    }
 
     setLoading(true);
     try {
@@ -62,7 +56,7 @@ export default function Home() {
   return (
     <main
       style={{
-        maxWidth: 520,
+        maxWidth: 480,
         margin: "40px auto",
         padding: 16,
         fontFamily: "system-ui",
