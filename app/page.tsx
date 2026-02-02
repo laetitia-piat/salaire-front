@@ -5,8 +5,6 @@ import { useState } from "react";
 type Result = {
   heures_normales: number;
   heures_dimanche: number;
-  taux_horaire: number;
-  majoration_dimanche: number;
   salaire_net: number;
   salaire_brut: number;
   type: string;
@@ -117,7 +115,6 @@ export default function Home() {
             <p>Salaire net : {result.salaire_net} €</p>
             <p>Salaire brut : {result.salaire_brut} €</p>
             <hr />
-            <small>Taux horaire: {result.taux_horaire}€</small>
           </div>
         )}
       </div>
