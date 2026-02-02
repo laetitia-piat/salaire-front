@@ -68,7 +68,7 @@ http://localhost:8000
 
 🔍 Endpoints disponibles
 
-#Health check
+####Health check
 GET /health
 
 Réponse :
