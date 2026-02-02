@@ -1,65 +1,128 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+
+type Result = {
+  heures_normales: number;
+  heures_dimanche: number;
+  taux_horaire: number;
+  majoration_dimanche: number;
+  salaire_normal: number;
+  salaire_dimanche: number;
+  total: number;
+};
 
 export default function Home() {
+  const [heures, setHeures] = useState<string>("");
+  const [heuresDimanche, setHeuresDimanche] = useState<string>("");
+  const [result, setResult] = useState<Result | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  async function onCalculate() {
+    setError(null);
+    setResult(null);
+
+    const h = Number(heures);
+    const hd = Number(heuresDimanche);
+
+    if (!Number.isFinite(h) || !Number.isFinite(hd) || h < 0 || hd < 0) {
+      setError("Merci d’entrer des nombres valides (>= 0).");
+      return;
+    }
+    if (hd > h) {
+      setError(
+        "Les heures de dimanche ne peuvent pas dépasser les heures totales.",
+      );
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:8000/calculate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ heures: h, heures_dimanche: hd }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Erreur côté API");
+      }
+
+      const data = (await res.json()) as Result;
+      setResult(data);
+    } catch (e) {
+      setError(
+        "Impossible de joindre l’API Python (est-elle bien lancée sur :8000 ?).",
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main
+      style={{
+        maxWidth: 520,
+        margin: "40px auto",
+        padding: 16,
+        fontFamily: "system-ui",
+      }}
+    >
+      <h1>Calcul salaire vacations</h1>
+
+      <div style={{ display: "grid", gap: 12, marginTop: 16 }}>
+        <label>
+          Heures travaillées (total)
+          <input
+            value={heures}
+            onChange={(e) => setHeures(e.target.value)}
+            type="number"
+            min="0"
+            step="0.25"
+            style={{ width: "100%", padding: 8, marginTop: 6 }}
+          />
+        </label>
+
+        <label>
+          Heures de dimanche
+          <input
+            value={heuresDimanche}
+            onChange={(e) => setHeuresDimanche(e.target.value)}
+            type="number"
+            min="0"
+            step="0.25"
+            style={{ width: "100%", padding: 8, marginTop: 6 }}
+          />
+        </label>
+
+        <button
+          onClick={onCalculate}
+          disabled={loading}
+          style={{ padding: 10, cursor: "pointer" }}
+        >
+          {loading ? "Calcul..." : "Calculer"}
+        </button>
+
+        {error && <p style={{ color: "crimson" }}>{error}</p>}
+
+        {result && (
+          <div
+            style={{ padding: 12, border: "1px solid #ddd", borderRadius: 8 }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            <p>
+              <b>Total :</b> {result.total} €
+            </p>
+            <p>Salaire normal : {result.salaire_normal} €</p>
+            <p>Salaire dimanche : {result.salaire_dimanche} €</p>
+            <hr />
+            <small>
+              Taux horaire: {result.taux_horaire}€ — Majoration dimanche:{" "}
+              {(result.majoration_dimanche * 100).toFixed(0)}%
+            </small>
+          </div>
+        )}
+      </div>
+    </main>
   );
 }
