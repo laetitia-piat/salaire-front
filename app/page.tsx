@@ -38,7 +38,7 @@ export default function Home() {
 
     setLoading(true);
     try {
-      const res = await fetch("https://apivac-production.up.railway.app/", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/calculate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ heures: h, heures_dimanche: hd }),
