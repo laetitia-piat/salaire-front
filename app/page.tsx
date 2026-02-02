@@ -62,13 +62,15 @@ export default function Home() {
         Calcul salaire vacations
       </h1>
 
-      <div style={{ display: "grid", gap: 12, marginTop: 16 }}>
+      <div style={{ display: "grid", gap: 10, marginTop: 16 }}>
         <select
           value={type}
           onChange={(e) => setType(e.target.value)}
           className="mt-1 w-full rounded border border-gray-300 p-2"
         >
-          <option value="Select">--Selectionner un lieu--</option>
+          <option value="Select" className="text-center">
+            --Selectionner un lieu--
+          </option>
           <option value="Tamaris">Tamaris</option>
           <option value="HPEL">HPEL</option>
           <option value="Diabeto">Diabeto</option>
