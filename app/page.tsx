@@ -113,7 +113,10 @@ export default function Home() {
           <div
             style={{ padding: 12, border: "1px solid #ddd", borderRadius: 8 }}
           >
-            <p>Salaire net : {result.salaire_net} €</p>
+            <p>
+              Salaire net :{" "}
+              <span className="font-bold">{result.salaire_net} €</span>
+            </p>
             <p>Salaire brut : {result.salaire_brut} €</p>
             <hr />
           </div>
