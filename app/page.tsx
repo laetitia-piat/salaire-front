@@ -54,10 +54,7 @@ export default function Home() {
   }
 
   return (
-    <main
-      className="mx-auto mt-10 max-w-[400px] p-4 bg-[url('/bg.png')] bg-cover bg-center bg-no-repeat
-    rounded-xl"
-    >
+    <main className="mx-auto mt-10 max-w-[400px] p-4">
       <h1 className="font-bold text-xl text-center mb-10">
         Calcul salaire vacations
       </h1>
@@ -66,7 +63,7 @@ export default function Home() {
         <select
           value={type}
           onChange={(e) => setType(e.target.value)}
-          className="mt-1 w-full rounded border border-gray-300 p-2"
+          className="mt-1 w-[100%] rounded border border-gray-500 bg-gray-300 p-2"
         >
           <option value="Select" className="text-center">
             --Selectionner un lieu--
@@ -75,39 +72,43 @@ export default function Home() {
           <option value="HPEL">HPEL</option>
           <option value="Diabeto">Diabeto</option>
         </select>
-        <label>
-          Heures travaillées (total)
-          <input
-            className="border"
-            value={heures}
-            onChange={(e) => setHeures(e.target.value)}
-            type="number"
-            min="0"
-            step="0.25"
-            style={{ width: "100%", padding: 8, marginTop: 6 }}
-          />
-        </label>
+        <div className="mt-6 rounded border border-gray-500 bg-gray-300 p-4">
+          <label className="font-bold">
+            Heures travaillées (total)
+            <input
+              className="rounded border"
+              value={heures}
+              onChange={(e) => setHeures(e.target.value)}
+              type="number"
+              min="0"
+              step="0.25"
+              style={{ width: "100%", padding: 8, marginTop: 6 }}
+            />
+          </label>
 
-        <label>
-          Heures de dimanche
-          <input
-            className="border"
-            value={heuresDimanche}
-            onChange={(e) => setHeuresDimanche(e.target.value)}
-            type="number"
-            min="0"
-            step="0.25"
-            style={{ width: "100%", padding: 8, marginTop: 6 }}
-          />
-        </label>
+          <label className="font-bold mt-4 mb-2 block">
+            Heures de dimanche
+            <input
+              className="rounded border"
+              value={heuresDimanche}
+              onChange={(e) => setHeuresDimanche(e.target.value)}
+              type="number"
+              min="0"
+              step="0.25"
+              style={{ width: "100%", padding: 8, marginTop: 6 }}
+            />
+          </label>
+        </div>
 
-        <button
-          onClick={onCalculate}
-          disabled={loading}
-          className="mt-5 p10 bg-gray-500 text-white rounded w-1/2 m-auto hover:pointer"
-        >
-          {loading ? "Calcul..." : "Calculer"}
-        </button>
+        <div className="p-2 rounded border border-gray-500 bg-gray-300 flex justify-center">
+          <button
+            onClick={onCalculate}
+            disabled={loading}
+            className="p-1 bg-gray-500 text-white rounded w-1/2 hover:bg-gray-600 disabled:opacity-50"
+          >
+            {loading ? "Calcul..." : "Calculer"}
+          </button>
+        </div>
 
         {error && <p style={{ color: "crimson" }}>{error}</p>}
 
