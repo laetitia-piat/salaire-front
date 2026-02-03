@@ -72,7 +72,7 @@ export default function Home() {
           <option value="HPEL">HPEL</option>
           <option value="Diabeto">Diabeto</option>
         </select>
-        <div className="mt-2 rounded border border-gray-500 bg-black p-4">
+        <div className="mt-2 rounded-md border border-gray-500 bg-black p-4">
           <label className=" text-gray-300">
             Heures travaillées (total)
             <input
@@ -100,7 +100,7 @@ export default function Home() {
           </label>
         </div>
 
-        <div className="mt-2 p-2 rounded border border-gray-500 bg-black flex justify-center">
+        <div className="mt-2 p-2 rounded-md border border-gray-500 bg-black flex justify-center">
           <button
             onClick={onCalculate}
             disabled={loading}
@@ -113,12 +113,11 @@ export default function Home() {
         {error && <p style={{ color: "crimson" }}>{error}</p>}
 
         {result && (
-          <div className="bg-black text-white p-12 border border-gray-500 rounded-md">
-            <p>
-              Salaire net :{" "}
-              <span className="font-bold">{result.salaire_net} €</span>
-            </p>
-            <p>Salaire brut : {result.salaire_brut} €</p>
+          <div className="bg-black text-white p-7 border border-gray-500 rounded-md">
+            <h2>Salaire net :</h2>
+            <p className="font-bold">{result.salaire_net} €</p>
+            <h2 className="mt-2">Salaire brut :</h2>
+            <p className="font-bold">{result.salaire_brut} €</p>
             <hr />
           </div>
         )}
