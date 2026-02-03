@@ -55,7 +55,7 @@ export default function Home() {
 
   return (
     <main className="mx-auto mt-10 max-w-[400px] p-4">
-      <h1 className="font-bold text-xl text-center mb-10">
+      <h1 className="font-bold text-2xl text-center mb-10 text-white">
         Calcul salaire vacations
       </h1>
 
@@ -63,7 +63,7 @@ export default function Home() {
         <select
           value={type}
           onChange={(e) => setType(e.target.value)}
-          className="mt-1 w-[100%] rounded border border-gray-500 bg-gray-300 p-2"
+          className="mt-1 w-[100%] rounded border border-gray-700 bg-gray-700 p-2 text-gray-300"
         >
           <option value="Select" className="text-center">
             --Selectionner un lieu--
@@ -72,11 +72,11 @@ export default function Home() {
           <option value="HPEL">HPEL</option>
           <option value="Diabeto">Diabeto</option>
         </select>
-        <div className="mt-6 rounded border border-gray-500 bg-gray-300 p-4">
-          <label className="font-bold">
+        <div className="mt-2 rounded border border-gray-500 bg-black p-4">
+          <label className=" text-gray-300">
             Heures travaillées (total)
             <input
-              className="rounded border"
+              className="rounded border border-gray-700 bg-gray-700 p-2 text-gray-300"
               value={heures}
               onChange={(e) => setHeures(e.target.value)}
               type="number"
@@ -86,10 +86,10 @@ export default function Home() {
             />
           </label>
 
-          <label className="font-bold mt-4 mb-2 block">
+          <label className="mt-4 mb-2 block text-gray-300">
             Heures de dimanche
             <input
-              className="rounded border"
+              className="rounded border bg-gray-700 border-gray-700 p-2 text-gray-300"
               value={heuresDimanche}
               onChange={(e) => setHeuresDimanche(e.target.value)}
               type="number"
@@ -100,11 +100,11 @@ export default function Home() {
           </label>
         </div>
 
-        <div className="p-2 rounded border border-gray-500 bg-gray-300 flex justify-center">
+        <div className="mt-2 p-2 rounded border border-gray-500 bg-black flex justify-center">
           <button
             onClick={onCalculate}
             disabled={loading}
-            className="p-1 bg-gray-500 text-white rounded w-1/2 hover:bg-gray-600 disabled:opacity-50"
+            className="p-1 bg-gray-700 text-white rounded w-1/2 hover:bg-gray-500 disabled:opacity-50"
           >
             {loading ? "Calcul..." : "Calculer"}
           </button>
@@ -113,9 +113,7 @@ export default function Home() {
         {error && <p style={{ color: "crimson" }}>{error}</p>}
 
         {result && (
-          <div
-            style={{ padding: 12, border: "1px solid #ddd", borderRadius: 8 }}
-          >
+          <div className="bg-black text-white p-12 border border-gray-500 rounded-md">
             <p>
               Salaire net :{" "}
               <span className="font-bold">{result.salaire_net} €</span>
