@@ -29,7 +29,7 @@ class SalaryInput(BaseModel):
 
 taux_horaire = float(os.getenv("taux_horaire", "12.2561"))   
 majoration_dimanche = float(os.getenv("majoration_dimanche", "7.86"))
-indemnite_sujetion_nuit = 0.0
+
 
 @app.get("/health")
 def health():
