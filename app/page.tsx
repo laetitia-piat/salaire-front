@@ -114,11 +114,11 @@ export default function Home() {
 
         {result && (
           <div className="bg-black text-white p-7 border border-gray-500 rounded-md">
-            <h2>Salaire net :</h2>
-            <p className="font-bold">{result.salaire_net} €</p>
-            <h2 className="mt-2">Salaire brut :</h2>
-            <p className="font-bold">{result.salaire_brut} €</p>
-            <hr />
+            <h2 className="text-center">Salaire net :</h2>
+            <p className="font-bold text-center">{result.salaire_net} €</p>
+            <hr className="mt-1 mb-1" />
+            <h2 className="text-center">Salaire brut :</h2>
+            <p className="font-bold text-center">{result.salaire_brut} €</p>
           </div>
         )}
       </div>
