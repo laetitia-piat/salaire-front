@@ -7,12 +7,14 @@ type Result = {
   heures_dimanche: number;
   salaire_net: number;
   salaire_brut: number;
+  heures_nuit: number;
   type: string;
 };
 
 export default function Home() {
   const [heures, setHeures] = useState<string>("");
   const [heuresDimanche, setHeuresDimanche] = useState<string>("");
+  const [heuresNuit, setHeuresNuit] = useState<string>("");
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -92,6 +94,19 @@ export default function Home() {
               className="rounded border bg-gray-700 border-gray-700 p-2 text-gray-300"
               value={heuresDimanche}
               onChange={(e) => setHeuresDimanche(e.target.value)}
+              type="number"
+              min="0"
+              step="0.25"
+              style={{ width: "100%", padding: 8, marginTop: 6 }}
+            />
+          </label>
+
+          <label className="mt-4 mb-2 block text-gray-300">
+            Heures de nuit
+            <input
+              className="rounded border bg-gray-700 border-gray-700 p-2 text-gray-300"
+              value={heuresNuit}
+              onChange={(e) => setHeuresNuit(e.target.value)}
               type="number"
               min="0"
               step="0.25"
