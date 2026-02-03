@@ -68,9 +68,9 @@ export default function Home() {
           <option value="Select" className="text-center">
             --Selectionner un lieu--
           </option>
-          <option value="Tamaris">Tamaris</option>
+          <option value="AFTC">AFTC28</option>
           <option value="HPEL">HPEL</option>
-          <option value="Diabeto">Diabeto</option>
+          <option value="LNA">LNA</option>
         </select>
         <div className="mt-2 rounded-md border border-gray-500 bg-black p-4">
           <label className=" text-gray-300">
