@@ -27,10 +27,6 @@ class SalaryInput(BaseModel):
     type: str
 
 
-taux_horaire = float(os.getenv("taux_horaire", "12.2561"))   
-majoration_dimanche = float(os.getenv("majoration_dimanche", "7.86"))
-
-
 @app.get("/health")
 def health():
     return {"ok": True}
@@ -44,11 +40,11 @@ def calculate(data: SalaryInput):
 
     match type:
         case "AFTC": 
-            salaire_base_mensu = taux_horaire * 151.67
+            salaire_base_mensu = 12.2561 * 151.67
             absence_entree_sortie = (151.67 - heures_travaillees) * 13.8253
             salaire_base = salaire_base_mensu - absence_entree_sortie
-            indemnite_sujetion = 0.0921 * (heures_travaillees * taux_horaire)
-            majoration_dimanche =heures_dimanches * majoration_dimanche
+            indemnite_sujetion = 0.0921 * (heures_travaillees * 12.2561)
+            majoration_dimanche = heures_dimanches * 7.86
             indemnite_precarite = 0.10* (salaire_base + indemnite_sujetion + majoration_dimanche +238)
             indemnite_conges_payes = 0.10 * (salaire_base + indemnite_sujetion + majoration_dimanche + indemnite_precarite+238)
             salaire_brut = salaire_base + indemnite_sujetion + majoration_dimanche + indemnite_precarite + indemnite_conges_payes + 238
