@@ -60,7 +60,7 @@ export default function Home() {
       setLoading(false);
     }
   }
-  console.log(type);
+
   return (
     <main className="mx-auto mt-10 max-w-[400px] p-4">
       <h1 className="font-bold text-2xl text-center mb-10 text-white">
