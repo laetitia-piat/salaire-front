@@ -26,6 +26,7 @@ export default function Home() {
 
     const h = Number(heures);
     const hd = Number(heuresDimanche);
+    const hn = Number(heuresNuit);
 
     if (!Number.isFinite(h) || !Number.isFinite(hd) || h < 0 || hd < 0) {
       setError("Merci d’entrer des nombres valides (>= 0).");
@@ -37,7 +38,12 @@ export default function Home() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/calculate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ heures: h, heures_dimanche: hd, type }),
+        body: JSON.stringify({
+          heures: h,
+          heures_dimanche: hd,
+          type,
+          heures_nuit: hn,
+        }),
       });
 
       if (!res.ok) {
