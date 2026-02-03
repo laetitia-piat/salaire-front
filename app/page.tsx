@@ -60,7 +60,7 @@ export default function Home() {
       setLoading(false);
     }
   }
-
+  console.log(type);
   return (
     <main className="mx-auto mt-10 max-w-[400px] p-4">
       <h1 className="font-bold text-2xl text-center mb-10 text-white">
@@ -106,19 +106,20 @@ export default function Home() {
               style={{ width: "100%", padding: 8, marginTop: 6 }}
             />
           </label>
-
-          <label className="mt-4 mb-2 block text-gray-300">
-            Heures de nuit
-            <input
-              className="rounded border bg-gray-700 border-gray-700 p-2 text-gray-300"
-              value={heuresNuit}
-              onChange={(e) => setHeuresNuit(e.target.value)}
-              type="number"
-              min="0"
-              step="0.25"
-              style={{ width: "100%", padding: 8, marginTop: 6 }}
-            />
-          </label>
+          {type === "HPEL" ? (
+            <label className="mt-4 mb-2 block text-gray-300">
+              Heures de nuit
+              <input
+                className="rounded border bg-gray-700 border-gray-700 p-2 text-gray-300"
+                value={heuresNuit}
+                onChange={(e) => setHeuresNuit(e.target.value)}
+                type="number"
+                min="0"
+                step="0.25"
+                style={{ width: "100%", padding: 8, marginTop: 6 }}
+              />
+            </label>
+          ) : null}
         </div>
 
         <div className="mt-2 p-2 rounded-md border border-gray-500 bg-black flex justify-center">
