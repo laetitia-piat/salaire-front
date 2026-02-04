@@ -48,8 +48,8 @@ Voici les principales technologies utilisées :
 
 📦Calcul_salaire
 ┣ 📂app  
- ┣ 📂public  
- ┣ 📜package.json
+┣ 📂public  
+┣ 📜package.json
 ┣ 📜tsconfig.json
 ┣ 📜next.config.ts
 ┗ 📜LICENSE
