@@ -144,9 +144,6 @@ export default function Home() {
           </div>
         )}
       </div>
-      <footer className="text-gray-300 text-center text-xs mt-14">
-        <p>© 2026 Laetitia Piat. Tous droits réservés.</p>
-      </footer>
     </main>
   );
 }
