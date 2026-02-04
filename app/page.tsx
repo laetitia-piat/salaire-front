@@ -126,7 +126,7 @@ export default function Home() {
           <button
             onClick={onCalculate}
             disabled={loading}
-            className="p-1 bg-gray-700 text-white rounded w-1/2 hover:bg-gray-500 disabled:opacity-50"
+            className="p-1 bg-gray-700 text-gray-300 rounded w-1/2 hover:bg-gray-500 disabled:opacity-50"
           >
             {loading ? "Calcul..." : "Calculer"}
           </button>
@@ -144,6 +144,9 @@ export default function Home() {
           </div>
         )}
       </div>
+      <footer className="text-gray-300 text-center text-xs mt-14">
+        <p>© 2026 Laetitia Piat. Tous droits réservés.</p>
+      </footer>
     </main>
   );
 }
