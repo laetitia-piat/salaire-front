@@ -31,52 +31,58 @@ class SalaryInput(BaseModel):
 def health():
     return {"ok": True}
 
+def calc_aftc(h: float, hd: float):
+    salaire_base = 12.2561 * h
+    indemnite_sujetion = 0.0921 * (h * 12.2561)
+    majoration_dimanche = hd * 7.86
+    segur = (h / 151.67) * 238
+    base = salaire_base + indemnite_sujetion + majoration_dimanche + segur
+    indemnite_precarite = base * 0.10 
+    indemnite_conges_payes = (base + indemnite_precarite) * 0.10
+    brut = base + indemnite_precarite + indemnite_conges_payes
+    net = brut * 0.769
+    return net, brut
+
+def calc_lna(h: float):
+    salaire_base = 12.45 * h
+    segur =  (h / 160) * 238
+    base = salaire_base + segur
+    indemnite_precarite = base * 0.10
+    indemnite_conges_payes = (base+ indemnite_precarite) * 0.10
+    brut = base +indemnite_precarite + indemnite_conges_payes
+    net = brut * 0.782
+    return net, brut
+
+def calc_hpel(h: float, hd: float, hn: float):
+    salaire_base = 12.021 * h
+    aug_forfaitaire = salaire_base / 56.7
+    majoration_dimanche = hd * 5.83
+    segur = (h * 1.358) + (h * 0.125)
+    rag_mensuelle = h* 0.6925
+    indemnite_sujetion_nuit = hn * 2.215 
+    base = salaire_base + aug_forfaitaire + majoration_dimanche + segur + rag_mensuelle + indemnite_sujetion_nuit
+    indemnite_fin_de_contrat = 0.10 * base
+    indemnite_conges_payes = 0.10 * (base + indemnite_fin_de_contrat)
+    brut =  base + indemnite_fin_de_contrat + indemnite_conges_payes
+    net = brut * 0.7864
+    return net, brut
+
 @app.post("/calculate")
 def calculate(data: SalaryInput):
-    heures_travaillees = data.heures
-    heures_dimanches = data.heures_dimanche
-    type = data.type
-    heures_nuit = data.heures_nuit
 
-    match type:
-        case "AFTC": 
-            salaire_base_mensu = 12.2561 * 151.67
-            absence_entree_sortie = (151.67 - heures_travaillees) * 13.8253
-            salaire_base = salaire_base_mensu - absence_entree_sortie
-            indemnite_sujetion = 0.0921 * (heures_travaillees * 12.2561)
-            majoration_dimanche = heures_dimanches * 7.86
-            indemnite_precarite = 0.10* (salaire_base + indemnite_sujetion + majoration_dimanche +238)
-            indemnite_conges_payes = 0.10 * (salaire_base + indemnite_sujetion + majoration_dimanche + indemnite_precarite+238)
-            salaire_brut = salaire_base + indemnite_sujetion + majoration_dimanche + indemnite_precarite + indemnite_conges_payes + 238
-            salaire_net = salaire_brut * 0.769
-        case "LNA":
-            salaire_base = 12.45 * heures_travaillees
-            revalorisation_segur =  (heures_travaillees / 160) * 238
-            indemnite_precarite = (salaire_base + revalorisation_segur) * 0.10
-            indemnite_conges_payes = (salaire_base + revalorisation_segur + indemnite_precarite) *0.10
-            salaire_brut = salaire_base  + revalorisation_segur +indemnite_precarite + indemnite_conges_payes
-            salaire_net = salaire_brut * 0.782
-        case "HPEL":
-            salaire_base = 12.021 * heures_travaillees
-            aug_forfaitaire = salaire_base / 56.7
-            majoration_dimanche = heures_dimanches * 5.83
-            revalorisation_segur = heures_travaillees * 1.358
-            revalorisation_segur2 = heures_travaillees * 0.125
-            rag_mensuelle = heures_travaillees* 0.6925
-            indemnite_sujetion_nuit = heures_nuit * 2.215 
-            indemnite_fin_de_contrat = 0.10 * (salaire_base + aug_forfaitaire + majoration_dimanche + revalorisation_segur + revalorisation_segur2 + rag_mensuelle +indemnite_sujetion_nuit)
-            indemnite_conges_payes = 0.10 * (salaire_base + aug_forfaitaire + majoration_dimanche + revalorisation_segur + revalorisation_segur2 + rag_mensuelle + indemnite_sujetion_nuit + indemnite_fin_de_contrat)
-            salaire_brut = salaire_base + aug_forfaitaire + majoration_dimanche + revalorisation_segur + revalorisation_segur2 + rag_mensuelle + indemnite_sujetion_nuit + indemnite_fin_de_contrat + indemnite_conges_payes
-            salaire_net = salaire_brut * 0.7864
-        case _:
-            return {"error": "Type inconnu"}
-
- 
+    if data.type == "AFTC":
+        net, brut = calc_aftc(data.heures, data.heures_dimanche)
+    elif data.type == "LNA":
+        net, brut = calc_lna(data.heures)
+    elif data.type == "HPEL":
+        net, brut = calc_hpel(data.heures, data.heures_dimanche, data.heures_nuit)
+    else:
+        return {"error": "Type inconnu"}
 
     return {
-        "heures_normales": heures_travaillees - heures_dimanches,
-        "heures_dimanche": heures_dimanches,
-        "heures_nuit": heures_nuit,
-        "salaire_net": round(salaire_net, 2),
-        "salaire_brut": round(salaire_brut, 2)
+        "heures_normales": data.heures - data.heures_dimanche,
+        "heures_dimanche": data.heures_dimanche,
+        "heures_nuit": data.heures_nuit,
+        "salaire_net": round(net, 2),
+        "salaire_brut": round(brut, 2)
     }
