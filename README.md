@@ -1,43 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📊 Calculateur de Salaire
 
-## Getting Started
+Bienvenue sur le projet **Calcul_salaire** !  
+C’est une petite application web qui permet de calculer facilement un salaire net à partir d’un salaire brut, en prenant en compte les règles simples de calcul.  
+Elle est développée avec **Next.js**, déployée sur **Vercel** (front) et se veut **simple, ergonomique et prête à être utilisée ou intégrée dans un portfolio de développeuse**.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🔗 **Live démo** : https://calculsalaire.vercel.app/ :contentReference[oaicite:1]{index=1}
 
 ---
 
-## Licence
+## 🚀 Présentation
 
-Ce projet est sous licence MIT.  
-Voir le fichier [LICENSE](./LICENSE).
+Ce projet a été créé pour :
+
+- apprendre à structurer une application moderne (frontend complet),
+- mettre en pratique des concepts de développement web (React & Next.js),
+- déployer une application en production avec gestion des variables d’environnement,
+- offrir un outil concret pour calculer les salaires nets à partir du brut.
+
+---
+
+## 🧠 Fonctionnalités principales
+
+Ce calculateur permet de :
+
+- entrer un **salaire brut**,
+- afficher le **salaire net estimé**,
+- visualiser les résultats de manière claire.
+
+_(Si tu veux, on peut ajouter des capture d’écran ou GIF dans le README pour montrer l’UI !)_
+
+---
+
+## 🧩 Tech Stack
+
+Voici les principales technologies utilisées :
+
+| Partie      | Technologie                               |
+| ----------- | ----------------------------------------- |
+| Framework   | `Next.js`                                 |
+| Langages    | `TypeScript`, `JavaScript`, `Tailwind`    |
+| Déploiement | Vercel                                    |
+| Licence     | MIT :contentReference[oaicite:2]{index=2} |
+
+---
+
+## 📁 Structure du projet
+
+📦Calcul_salaire
+┣ 📂app  
+ ┣ 📂public  
+ ┣ 📜package.json
+┣ 📜tsconfig.json
+┣ 📜next.config.ts
+┗ 📜LICENSE
+
+## 🛠️ Personnalisation & développement
+
+Inputs validés côté frontend
+
+Facile à étendre avec d’autres options de calcul (exemple : simulation de cotisations sociales)
+
+Potentiellement couplable à une API backend si tu veux gérer plusieurs règles ou profils
+
+## 📄 Licence
+
+Ce projet est sous licence MIT — voir le fichier LICENSE pour les détails.
+
+## 🙌 À propos
+
+Créé par Laetitia Piat – Développeuse 💻
+Tu peux me retrouver sur LinkedIn ou GitHub pour plus de projets ou collaborations 😉
