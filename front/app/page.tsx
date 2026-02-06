@@ -89,6 +89,8 @@ export default function Home() {
     }
   };
 
+  const isHPEL = input.type === "HPEL";
+
   return (
     <main className="mx-auto mt-10 max-w-[400px] p-4">
       <h1 className="font-bold text-2xl text-center mb-10 text-white">
@@ -137,7 +139,7 @@ export default function Home() {
               style={{ width: "100%", padding: 8, marginTop: 6 }}
             />
           </label>
-          {input.type === "HPEL" ? (
+          {isHPEL && (
             <label className="mt-4 mb-2 block text-gray-300">
               Heures de nuit
               <input
@@ -152,7 +154,7 @@ export default function Home() {
                 style={{ width: "100%", padding: 8, marginTop: 6 }}
               />
             </label>
-          ) : null}
+          )}
         </div>
 
         <div className="mt-2 p-2 rounded-md border border-gray-500 bg-black flex justify-center">
