@@ -21,6 +21,12 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState("");
+  const lieus = [
+    { value: "Select", label: "--Selectionner un lieu--" },
+    { value: "AFTC", label: "AFTC28" },
+    { value: "HPEL", label: "HPEL" },
+    { value: "LNA", label: "LNA" },
+  ];
 
   async function onCalculate() {
     setError(null);
@@ -76,12 +82,11 @@ export default function Home() {
           onChange={(e) => setType(e.target.value)}
           className="mt-1 w-[100%] rounded border border-gray-700 bg-gray-700 p-2 text-gray-300"
         >
-          <option value="Select" className="text-center">
-            --Selectionner un lieu--
-          </option>
-          <option value="AFTC">AFTC28</option>
-          <option value="HPEL">HPEL</option>
-          <option value="LNA">LNA</option>
+          {lieus.map((lieu) => (
+            <option key={lieu.value} value={lieu.value} className="text-center">
+              {lieu.label}
+            </option>
+          ))}
         </select>
         <div className="mt-2 rounded-md border border-gray-500 bg-black p-4">
           <label className=" text-gray-300">
