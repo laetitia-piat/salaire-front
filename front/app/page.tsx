@@ -8,14 +8,14 @@ type CalculationResult = {
   salaire_net: number;
   salaire_brut: number;
   heures_nuit: number;
-  type: string;
+  lieu: string;
 };
 
 type CalculationInput = {
-  heures: number;
-  heures_dimanche: number;
-  type: string;
-  heures_nuit: number;
+  heures: string;
+  heures_dimanche: string;
+  lieu: string;
+  heures_nuit: string;
 };
 
 type CalculationState =
@@ -25,10 +25,10 @@ type CalculationState =
   | { status: "error"; message: string };
 
 const initialInput: CalculationInput = {
-  heures: 0,
-  heures_dimanche: 0,
-  type: "Select",
-  heures_nuit: 0,
+  heures: "",
+  heures_dimanche: "",
+  lieu: "Select",
+  heures_nuit: "",
 };
 
 export default function Home() {
@@ -48,9 +48,9 @@ export default function Home() {
     const h = Number(input.heures);
     const hd = Number(input.heures_dimanche);
     const hn = Number(input.heures_nuit);
-    const type = input.type;
+    const lieu = input.lieu;
 
-    if (!type || type === "Select") {
+    if (!lieu || lieu === "Select") {
       setCalcState({
         status: "error",
         message: "Veuillez sélectionner un lieu.",
@@ -80,7 +80,7 @@ export default function Home() {
         body: JSON.stringify({
           heures: h,
           heures_dimanche: hd,
-          type,
+          lieu,
           heures_nuit: hn,
         }),
       });
@@ -100,7 +100,7 @@ export default function Home() {
     }
   };
 
-  const isHPEL = input.type === "HPEL";
+  const isHPEL = input.lieu === "HPEL";
 
   return (
     <main className="mx-auto mt-10 max-w-[400px] p-4">
@@ -110,8 +110,8 @@ export default function Home() {
 
       <div style={{ display: "grid", gap: 10, marginTop: 16 }}>
         <select
-          value={input.type}
-          onChange={(e) => setInput({ ...input, type: e.target.value })}
+          value={input.lieu}
+          onChange={(e) => setInput({ ...input, lieu: e.target.value })}
           className="mt-1 w-[100%] rounded border border-gray-700 bg-gray-700 p-2 text-gray-300"
         >
           {lieux.map((lieu) => (
@@ -126,9 +126,7 @@ export default function Home() {
             <input
               className="rounded border border-gray-700 bg-gray-700 p-2 text-gray-300"
               value={input.heures}
-              onChange={(e) =>
-                setInput({ ...input, heures: Number(e.target.value) })
-              }
+              onChange={(e) => setInput({ ...input, heures: e.target.value })}
               type="number"
               min="0"
               step="0.25"
@@ -142,7 +140,7 @@ export default function Home() {
               className="rounded border bg-gray-700 border-gray-700 p-2 text-gray-300"
               value={input.heures_dimanche}
               onChange={(e) =>
-                setInput({ ...input, heures_dimanche: Number(e.target.value) })
+                setInput({ ...input, heures_dimanche: e.target.value })
               }
               type="number"
               min="0"
@@ -157,7 +155,7 @@ export default function Home() {
                 className="rounded border bg-gray-700 border-gray-700 p-2 text-gray-300"
                 value={input.heures_nuit}
                 onChange={(e) =>
-                  setInput({ ...input, heures_nuit: Number(e.target.value) })
+                  setInput({ ...input, heures_nuit: e.target.value })
                 }
                 type="number"
                 min="0"
