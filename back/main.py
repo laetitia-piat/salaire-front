@@ -25,7 +25,7 @@ class SalaryInput(BaseModel):
     heures: float
     heures_dimanche: float
     heures_nuit: float
-    type: str
+    lieu: str
 
 
 @app.get("/health")
@@ -71,11 +71,11 @@ def calc_hpel(h: float, hd: float, hn: float):
 @app.post("/calculate")
 def calculate(data: SalaryInput):
 
-    if data.type == "AFTC":
+    if data.lieu == "AFTC":
         net, brut = calc_aftc(data.heures, data.heures_dimanche)
-    elif data.type == "LNA":
+    elif data.lieu == "LNA":
         net, brut = calc_lna(data.heures)
-    elif data.type == "HPEL":
+    elif data.lieu == "HPEL":
         net, brut = calc_hpel(data.heures, data.heures_dimanche, data.heures_nuit)
     else:
         return {"error": "Type inconnu"}

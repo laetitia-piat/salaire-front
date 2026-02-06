@@ -126,7 +126,7 @@ Corps de la requête :
 {
   "heures": 120,
   "heures_dimanche": 16,
-  "type": "Tamaris"
+  "lieu": "Tamaris"
 }
 ```
 
@@ -166,7 +166,7 @@ NEXT_PUBLIC_API_URL=https://<url-api-railway>
 
 ## ✨ Améliorations possibles
 
-- Ajout de nouveaux types de vacations
+- Ajout de nouveaux lieux de vacations
 - Tests unitaires (front & back)
 - Export des résultats (PDF / Excel)
 - Historique des calculs
