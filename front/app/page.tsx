@@ -15,7 +15,7 @@ type CalculationInput = {
   heures: number;
   heures_dimanche: number;
   type: string;
-  heures_nuit?: number;
+  heures_nuit: number;
 };
 
 type CalculationState =
@@ -23,8 +23,6 @@ type CalculationState =
   | { status: "loading" }
   | { status: "success"; result: CalculationResult }
   | { status: "error"; message: string };
-
-export const dynamic = "force-dynamic";
 
 const initialInput: CalculationInput = {
   heures: 0,
@@ -52,7 +50,21 @@ export default function Home() {
     const hn = Number(input.heures_nuit);
     const type = input.type;
 
-    if (!Number.isFinite(h) || !Number.isFinite(hd) || h < 0 || hd < 0) {
+    if (!type || type === "Select") {
+      setCalcState({
+        status: "error",
+        message: "Veuillez sélectionner un lieu.",
+      });
+      return;
+    }
+    if (
+      !Number.isFinite(h) ||
+      !Number.isFinite(hd) ||
+      !Number.isFinite(hn) ||
+      h < 0 ||
+      hd < 0 ||
+      hn < 0
+    ) {
       setCalcState({
         status: "error",
         message: "Merci d’entrer des nombres valides (>= 0).",
@@ -63,7 +75,6 @@ export default function Home() {
     setCalcState({ status: "loading" });
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/calculate`, {
-        cache: "no-store",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
