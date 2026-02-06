@@ -168,13 +168,23 @@ export default function Home() {
           )}
         </div>
 
-        <div className="mt-2 p-2 rounded-md border border-gray-500 bg-black flex justify-center">
+        <div className="mt-2 p-2 rounded-md border border-gray-500 bg-black flex justify-around">
           <button
             onClick={onCalculate}
             disabled={calcState.status === "loading"}
-            className="p-1 bg-gray-700 text-gray-300 rounded w-1/2 hover:bg-gray-500 disabled:opacity-50"
+            className="p-1 bg-gray-700 text-gray-300 rounded w-1/3 hover:bg-gray-500 disabled:opacity-50"
           >
             {calcState.status === "loading" ? "Calcul..." : "Calculer"}
+          </button>
+          <button
+            onClick={() => {
+              setInput(initialInput);
+              setCalcState({ status: "idle" });
+            }}
+            disabled={calcState.status === "loading"}
+            className="p-1 bg-gray-700 text-gray-300 rounded w-1/3 hover:bg-gray-500 disabled:opacity-50"
+          >
+            {"Réinitialiser"}
           </button>
         </div>
 
