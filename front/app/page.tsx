@@ -11,6 +11,8 @@ type Result = {
   type: string;
 };
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   const [heures, setHeures] = useState<string>("");
   const [heuresDimanche, setHeuresDimanche] = useState<string>("");
@@ -36,6 +38,7 @@ export default function Home() {
     setLoading(true);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/calculate`, {
+        cache: "no-store",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
